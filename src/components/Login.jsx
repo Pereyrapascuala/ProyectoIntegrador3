@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
+import { useState, useRef } from "react";
+import { useAuth } from "../context/AuthContext";
+
 
 function Login() {
     const usernameRef = useRef("");
@@ -31,9 +32,40 @@ function Login() {
                 })
                 .then((responseData) => {
                     login(responseData.token);
+                    if (responseData.token) {
+                        fetch(
+                            `${
+                                import.meta.env.VITE_API_BASE_URL
+                            }users/profiles/profile_data/`,
+                            {
+                                method: "GET",
+                                headers: {
+                                    Authorization: `Token ${responseData.token}`,
+                                },
+                            }
+                        )
+                            .then((profileResponse) => {
+                                if (!profileResponse.ok) {
+                                    throw new Error(
+                                        "Error al obtener id de usuario"
+                                    );
+                                }
+                                return profileResponse.json();
+                            })
+                            .then((profileData) =>
+                                login(responseData.token, profileData.user__id)
+                            )
+                            .catch((error) => {
+                                console.error(
+                                    "Error al obtener id de usuario",
+                                    error
+                                );
+                                setIsError(true);
+                            });
+                    }
                 })
                 .catch((error) => {
-                    console.error("Error error al iniciar sesión", error);
+                    console.error("Error error al iniciar sección", error);
                     setIsError(true);
                 })
                 .finally(() => {
@@ -41,11 +73,10 @@ function Login() {
                 });
         }
     }
-
-    return (
+    return(
         <section className="section">
             <div className="columns is-centered">
-                <div className="column is-4">
+                <div className="column is-12 is-centered">
                     <form onSubmit={handleSubmit}>
                         <div className="field">
                             <label htmlFor="username">Nombre de usuario:</label>
@@ -81,9 +112,9 @@ function Login() {
                             <div className="control">
                                 <button
                                     type="submit"
-                                    className="button is-primary is-fullwidth"
+                                    className="button is-success is-rounded "
                                 >
-                                    Enviar
+                                    Iniciar Seccion
                                 </button>
                                 {isLoading && <p>Cargando...</p>}
                                 {isError && <p>Error al cargar los datos.</p>}
@@ -95,5 +126,4 @@ function Login() {
         </section>
     );
 }
-
 export default Login;
