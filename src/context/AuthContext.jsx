@@ -1,27 +1,25 @@
-
 import { createContext, useContext, useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
-const AuthContext = createContext({
-    state:{},
-    actions:{},
-})
-const ACTIONS = {
-    LOGIN: "LOGIN",
-    LOGOUT: "LOGOUT",
+const AuthContext = createContext();
+
+const initialState = {
+    token: null,
+    userId: null,
 };
 
-function reducer(state, action) {
+function AuthReducer(state, action) {
     switch (action.type) {
-        case ACTIONS.LOGIN:
+        case 'LOGIN':
             return {
                 ...state,
                 token: action.payload,
-                isAuthenticated: true,
+                userId: action.payload,
             };
-        case ACTIONS.LOGOUT:
+        case 'LOGOUT':
             return {
-                isAuthenticated: false,
+                ...state, 
+                token: null, 
+                userId: null
             };
         default:
             return state;
@@ -29,39 +27,26 @@ function reducer(state, action) {
 }
 // eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, {
-        token: localStorage.getItem("authToken"),
-        isAuthenticated: localStorage.getItem("authToken") ? true : false,
-    });
-    const navigate = useNavigate();
-    const location = useLocation();
+    const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-    const actions = {
-        login: (token) => {
-            dispatch({ type: ACTIONS.LOGIN, payload: token });
-            localStorage.setItem("authToken", token);
-            const origin = location.state?.from?.pathname || "/";
-            navigate(origin);
-        },
-        logout: () => {
-            dispatch({ type: ACTIONS.LOGOUT });
-            localStorage.removeItem("authToken");
-        },
+    const login = (token, userId) => {
+        dispatch({ type: 'LOGIN', payload: { token, userId } });
     };
+
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' });
+    };
+
+    
     return (
-        <AuthContext.Provider value={{ state, actions }}>
+        <AuthContext.Provider value={{ token: state, userId: statusbar.userId,login, logout }}>
             {children}
         </AuthContext.Provider>
     );
 }
 
-function useAuth(type) {
-    const context = useContext(AuthContext);
-    if(context === undefined) {
-        throw new Error("useAuth must be used within an authProvider");
-        
-    }
-    return context[type];
+function useAuth() {
+    return useContext(AuthContext);
 };
 // eslint-disable-next-line react-refresh/only-export-components
 export {AuthProvider, AuthContext, useAuth };

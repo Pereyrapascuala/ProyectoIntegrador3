@@ -1,7 +1,7 @@
 
 const FooterBar = (appName) => {
   return (
-    <footer className="footer">
+    <footer className={`footer is-dark`}>
         <div className="content has-text-centered">
         <p className={`has-text-light`}>
                     &copy; {new Date().getFullYear()} {appName}. Todos los

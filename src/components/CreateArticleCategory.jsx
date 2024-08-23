@@ -33,11 +33,22 @@ const CreateArticleCategory = () => {
   return (
     <div>
       <h2>Crear Nueva Categoría</h2>
-      <form onSubmit={handleSubmit}>
+      <form className={`box m-4 p-4 has-background-dark`} onSubmit={handleSubmit}>
         <div>
           <label>Artículo:</label>
           <input type="number" value={article} onChange={(e) => setArticle(e.target.value)} />
         </div>
+        <div className="field">
+                <label className="label">Imagen:</label>
+                <div className="control">
+                    <input
+                        className="input"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setCategory(e.target.value)}
+                    />
+                </div>
+            </div>
         <div>
           <label>Categoría:</label>
           <input type="number" value={category} onChange={(e) => setCategory(e.target.value)} />

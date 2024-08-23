@@ -1,11 +1,12 @@
 import { useAuth } from "../context/AuthContext"
+
 import Login from "./Login";
 
 
 const NavBar = () => {
     const {user, logout} =useAuth();
   return (
-    <nav className="navbar is-primary">
+    <nav className="navbar is-warning" role="navigation" aria-label="main-navigation">
         <div className="navbar-brand">
             <a  className="navbar-item"  href="/">InfoShare</a>
         </div>
