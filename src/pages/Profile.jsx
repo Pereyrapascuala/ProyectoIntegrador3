@@ -4,7 +4,7 @@ import '../styles/Profile.css';
 
 function Profile() {
   const { state } = useAuth();
-  const { user } = state;
+  const { user } = state || {}; // Asegúrate de que state no sea undefined
 
   if (!user) {
     return <div>Cargando...</div>; // Mostrar un mensaje de carga si el usuario no está disponible aún

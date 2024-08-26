@@ -5,29 +5,26 @@ import '../styles/NavBar.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth(); // Accede a 'user' y 'logout' del contexto de autenticación
+  const { user, logout } = useAuth();
 
   const handleLoginLogout = () => {
-    if (user) { // Si el usuario está autenticado
-      logout(); // Cierra la sesión
-      navigate('/'); // Redirige a la página de inicio
+    if (user) {
+      logout();
+      navigate('/'); // Redirige a la página de inicio después de cerrar sesión
     } else {
-      navigate('/login'); // Si no está autenticado, redirige a la página de login
+      navigate('/login'); // Redirige a la página de login si no está autenticado
     }
-  };
-
-  const handleProfile = () => {
-    navigate('/profile'); // Redirige a la página de perfil
   };
 
   return (
     <div className="navbar">
       <div className="nav-links">
         <Link to="/">Home</Link>
-        {user && <Link to="/login">Login</Link>} {/* Muestra la opción de perfil solo si el usuario está autenticado */}
-        <a  onClick={handleLoginLogout}>
+        {!user && <Link to="/login">Login</Link>} {/* Muestra "Login" solo si el usuario no está autenticado */}
+        {user && <Link to="/profile">Profile</Link>} {/* Muestra "Profile" solo si el usuario está autenticado */}
+        <button onClick={handleLoginLogout}>
           {user ? 'Cerrar Sesión' : 'Login'} {/* Cambia el texto del botón dependiendo del estado de autenticación */}
-        </a>
+        </button>
       </div>
     </div>
   );
