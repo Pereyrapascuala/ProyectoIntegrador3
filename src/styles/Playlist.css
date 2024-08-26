@@ -1,0 +1,112 @@
+.playlist {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.playlist h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.playlist ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.playlist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.playlist li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.playlist-title {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.playlist-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.playlist-actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.playlist-actions .edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.playlist-actions .edit-button:hover {
+  background-color: #45a049;
+}
+
+.playlist-actions .delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.playlist-actions .delete-button:hover {
+  background-color: #e53935;
+}
+
+.error {
+  color: red;
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loading {
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+  background-color: #0056b3;
+}

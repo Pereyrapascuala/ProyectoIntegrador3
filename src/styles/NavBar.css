@@ -1,0 +1,27 @@
+.navbar {
+  width: calc(100% - 288px); /* Deja espacio para la barra lateral */
+  height: 80px;
+  background-color: #121212;
+  color: white;
+  padding: 0 2rem;
+  position: fixed;
+  top: 0;
+  left: 288px; /* Alinea a la derecha de la barra lateral */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.nav-links a {
+  color: white;
+  margin-right: 1.5rem;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}

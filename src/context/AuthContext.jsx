@@ -1,52 +1,37 @@
-import { createContext, useContext, useReducer } from "react";
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
 
-const initialState = {
-    token: null,
-    userId: null,
-};
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-function AuthReducer(state, action) {
-    switch (action.type) {
-        case 'LOGIN':
-            return {
-                ...state,
-                token: action.payload,
-                userId: action.payload,
-            };
-        case 'LOGOUT':
-            return {
-                ...state, 
-                token: null, 
-                userId: null
-            };
-        default:
-            return state;
+  useEffect(() => {
+    // Cargar datos del usuario desde localStorage si existen
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
-}
-// eslint-disable-next-line react/prop-types
-function AuthProvider({ children }) {
-    const [state, dispatch] = useReducer(AuthReducer, initialState);
+  }, []);
 
-    const login = (token, userId) => {
-        dispatch({ type: 'LOGIN', payload: { token, userId } });
-    };
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('userData', JSON.stringify(userData));
+  };
 
-    const logout = () => {
-        dispatch({ type: 'LOGOUT' });
-    };
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('userData');
+  };
 
-    
-    return (
-        <AuthContext.Provider value={{ token: state, userId: statusbar.userId,login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
-}
-
-function useAuth() {
-    return useContext(AuthContext);
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
-// eslint-disable-next-line react-refresh/only-export-components
-export {AuthProvider, AuthContext, useAuth };
+
+export const useAuth = () => useContext(AuthContext);
+
+export default AuthContext;

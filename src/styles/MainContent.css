@@ -1,0 +1,75 @@
+.main-content {
+  margin-left: 240px;
+  padding: 2rem;
+  background-color: #121212;
+  color: white;
+  min-height: calc(100vh - 60px); /* Asegura que haya espacio para el contenido sin superposición */
+  margin-top: 60px; /* Deja espacio para la barra de navegación */
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Añadir más espacio entre las secciones */
+}
+
+.section {
+  margin-bottom: 2rem;
+  text-align: center; /* Centrar el texto de las secciones */
+}
+
+.section h2 {
+  font-size: 2rem; /* Aumentar el tamaño del título */
+  margin-bottom: 1.5rem;
+}
+
+.scrollable {
+  display: flex;
+  justify-content: center; /* Centrar el carrusel */
+  gap: 2rem; /* Añadir más espacio entre las tarjetas */
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.card {
+  background-color: #181818;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 150px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #b3b3b3;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Eliminar estas reglas para quitar el botón verde de reproducción */
+/*
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1db954;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: none;
+}
+
+.card:hover .play-button {
+  display: block;
+}
+*/

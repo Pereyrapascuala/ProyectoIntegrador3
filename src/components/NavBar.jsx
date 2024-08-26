@@ -1,27 +1,36 @@
-import { useAuth } from "../context/AuthContext"
-
-import Login from "./Login";
-
+/* eslint-disable no-unused-vars */
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import '../styles/NavBar.css';
 
 const NavBar = () => {
-    const {user, logout} =useAuth();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth(); // Accede a 'user' y 'logout' del contexto de autenticación
+
+  const handleLoginLogout = () => {
+    if (user) { // Si el usuario está autenticado
+      logout(); // Cierra la sesión
+      navigate('/'); // Redirige a la página de inicio
+    } else {
+      navigate('/login'); // Si no está autenticado, redirige a la página de login
+    }
+  };
+
+  const handleProfile = () => {
+    navigate('/profile'); // Redirige a la página de perfil
+  };
+
   return (
-    <nav className="navbar is-warning" role="navigation" aria-label="main-navigation">
-        <div className="navbar-brand">
-            <a  className="navbar-item"  href="/">InfoShare</a>
-        </div>
-        <div className="navbar-end">
-            {user ? (
-                <>
-                <a className="navbar-item" onClick={logout}>Cerrar Seccion</a>
-                </>
-            ): (
-                <a className="navbar-item" onClick={Login}>Iniciar Seccion</a>
-            )}
-        </div>
+    <div className="navbar">
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        {user && <Link to="/profile">Profile</Link>} {/* Muestra la opción de perfil solo si el usuario está autenticado */}
+        <a href="#" onClick={handleLoginLogout}>
+          {user ? 'Cerrar Sesión' : 'Login'} {/* Cambia el texto del botón dependiendo del estado de autenticación */}
+        </a>
+      </div>
+    </div>
+  );
+};
 
-    </nav>
-  )
-}
-
-export default NavBar
+export default NavBar;
