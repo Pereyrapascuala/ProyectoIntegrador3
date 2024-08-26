@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import { getPlaylist } from '../services/api';
 
 const PlaylistDetail = ({ playlistId, onClose }) => {

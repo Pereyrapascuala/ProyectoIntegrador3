@@ -24,8 +24,8 @@ const NavBar = () => {
     <div className="navbar">
       <div className="nav-links">
         <Link to="/">Home</Link>
-        {user && <Link to="/profile">Profile</Link>} {/* Muestra la opción de perfil solo si el usuario está autenticado */}
-        <a href="#" onClick={handleLoginLogout}>
+        {user && <Link to="/login">Login</Link>} {/* Muestra la opción de perfil solo si el usuario está autenticado */}
+        <a  onClick={handleLoginLogout}>
           {user ? 'Cerrar Sesión' : 'Login'} {/* Cambia el texto del botón dependiendo del estado de autenticación */}
         </a>
       </div>

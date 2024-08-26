@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Sidebar from './components/Sidebar';
@@ -22,10 +21,14 @@ const App = () => {
             <Sidebar />
             <MainContent>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/playlist/:playlistId" element={<ProtectedRoute element={<Playlist />} />} />
+                <Route path="/" 
+                        element={<Home />} />
+                <Route path="/profile" 
+                        element={<ProtectedRoute element={<Profile />} />} />
+                <Route path="/login" 
+                        element={<Login />} />
+                <Route path="/playlist/:playlistId" 
+                        element={<ProtectedRoute element={<Playlist />} />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </MainContent>
